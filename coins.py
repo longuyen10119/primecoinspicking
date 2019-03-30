@@ -11,7 +11,7 @@ def testPrime(n):
         if n%i ==0:
             return False
     return True
-def findCombiDP(amount, coins):
+def findCombiDP(amount, coins, choice):
     combi =  [0]*(amount+1)
     combi[0] = 1
 
@@ -19,6 +19,8 @@ def findCombiDP(amount, coins):
         for a in range(1,len(combi)):
             if a>= c:
                 combi[a] += combi[a-c]
+                choice.append(c)
+        print (combi)
     
     return combi[amount]
 
@@ -30,9 +32,8 @@ def findCombiR(amount,coins, index,ls):
         return 0
     num = 0
     for coin in range(index,len(coins)):
+        ls.append(coins[index])
         num += findCombiR(amount-coins[coin],coins,coin,ls)
-    ls.append(coins[index])
-
     return num
 
 def generatePrimeList(n):
@@ -43,14 +44,21 @@ def generatePrimeList(n):
     return primeList
 
 def main():
-    n = int(input('Enter a number:'))
+    n = int(input('Enter a number: '))
     coins = generatePrimeList(n)
-    ls = []
-    result = findCombiR(n,coins,0,ls)
-    print(ls)
-    print('---------------------')
+
+    # SOLVING with Recursive
+    # ls = []
+    # result = findCombiR(n,coins,0,ls)
+    # print(ls)
+    # print('---------------------')
+    # print('Answer is ' + str(result))
+
+    # Solving with DP 
+    print(coins)
+    print()
+    choice = []
+    result= findCombiDP(n,coins,choice)
     print('Answer is ' + str(result))
-
-
 main()
     

@@ -47,10 +47,22 @@ def main():
     arr = list(map(lambda x: int(x), arr))
 
     coins = generatePrimeList(arr[0])
-#     SOLVING with Recursive
+
     start = time.time()
-    
-    result = findCombiR(arr[0],coins,0,0,arr[1],arr[2])
+    num = arr[0]
+    lr =0
+    hr = 0
+    if len(arr)==1:
+        lr = 1
+        hr = num
+    elif len(arr)==2:
+        lr = arr[1]
+        hr = arr[1]
+    else:
+        lr = arr[1]
+        hr = arr[2]
+
+    result = findCombiR(arr[0],coins,0,0,lr,hr)
 
     print(result)
     print(time.time()-start)
